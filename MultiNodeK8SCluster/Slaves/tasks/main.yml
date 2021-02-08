@@ -1,0 +1,79 @@
+---
+# tasks file for Slaves
+- name: "installing docker"
+  package:
+     name: docker
+     state: present
+
+- name: "Starting Docker"
+  service:
+     name: docker
+     state:  restarted
+
+- name: "enabling docker"
+  shell: "systemctl enable docker --now"
+  changed_when: false
+
+- name: Configure kubernetes repo
+  shell: |
+      cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+      enabled=1
+      gpgcheck=1
+      repo_gpgcheck=1
+      gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      exclude=kubelet kubeadm kubectl
+      EOF
+  ignore_errors: yes
+  changed_when: false
+
+- name: "Installing KubeAdm, kubectl and kubelet"
+  shell: "yum install -y  kubeadm  --disableexcludes=kubernetes"
+  register: kubeadm
+  changed_when: false
+
+- debug:
+    var: kubeadm.stdout_lines
+
+- name: "Enabling kubelet"
+  shell: "systemctl enable kubelet  --now"
+  changed_when: false
+
+- name: "Pulling Images using KubeAdm"
+  shell: "kubeadm config  images pull"
+  changed_when: false
+  register: pull_images
+
+- debug:
+     var: pull_images.stdout_lines
+- name: "Creating daemon.json file inside /etc/docker"
+  shell: |
+      cat <<EOF | sudo tee  /etc/docker/daemon.json
+      {
+      "exec-opts": ["native.cgroupdriver=systemd"]
+      }
+      EOF
+  changed_when: false
+- name: "Re-starting Docker"
+  service:
+     name: docker
+     state:  restarted
+- name: "Installing iproute-tc"
+  package:
+     name: iproute-tc
+
+- name: "Setting bridge-nf-call-iptables to 1"
+  shell: |
+       echo "1"  > /proc/sys/net/bridge/bridge-nf-call-iptables
+  changed_when: false
+
+- name: "Initializing Master"
+  shell: "{{ master_token  }}"
+  ignore_errors: yes
+  register: init
+
+- debug:
+    var: init.stdout_lines
+
