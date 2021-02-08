@@ -11,6 +11,7 @@ Requirements
 Role Variables
 --------------
 The  below variables are used in the tasks. But you can see this variables in the vars folder also.
+```
 # vars file for ec2_launch
 -- aws_access_key: 'enter your access key'
 -- aws_secret_key: 'enter your secret key'
@@ -31,7 +32,7 @@ The  below variables are used in the tasks. But you can see this variables in th
      - "K8S_Master_testing"
      - "K8S_Slave1_testing"
      - "K8S_Slave2_testing"
-
+```
 
 
 Example Playbook
