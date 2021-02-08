@@ -9,6 +9,18 @@ Role Variables
 The variable of the **master_token** will receiving the tokens after the initialization of the master node. The variable **master_token** is used inside the tasks of the slaves inside the *Joining Slaves to Master Node*.
 
 
+Modules and Parameters Used:
+------------
+1. hosts
+2. tasks
+3. package
+4. service
+5. ignore_errors
+6. changed_when
+7. register
+8. debug
+
+
 Example Playbook
 ----------------
 
