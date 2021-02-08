@@ -1,0 +1,18 @@
+---
+# vars file for create_vpc
+aws_access_key: 'AKIA2AFPO34TTXFDBBVQ'
+aws_secret_key: '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'
+vpc_title: 'K8S Cluster'
+vpc_name: "{{ vpc_title }} VPC"
+igw_name: "{{ vpc_title }} IGW"
+subnet_name: "{{ vpc_title }} Subnet"
+security_group_name: "{{ vpc_title }} Security Group"
+route_table_name: "{{ vpc_title }} route table"
+vpcCidrBlock: '10.0.0.0/16'
+subNetCidrBlock: '10.0.1.0/24'
+port22CidrBlock: '0.0.0.0/0'
+destinationCidrBlock: '0.0.0.0/0'
+state: "present"
+zone: "ap-south-1a"
+region: "ap-south-1"
+

@@ -1,0 +1,7 @@
+- hosts: "localhost"
+  roles:
+  - name: "Creating VPC"
+    role: "/root/task19/create_vpc" 
+
+  - name: "Launching ec2-instance"
+    role: "/root/task19/ec2_launch"

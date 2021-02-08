@@ -1,0 +1,19 @@
+---
+# tasks file for ec2_launch
+- name: "provisioning OS on AWS using Ansible"
+  ec2:
+     key_name: "ansiblekey"
+     instance_type: "t2.micro"
+     image: "ami-08e0ca9924195beba"
+     wait: yes
+     count: 1
+     vpc_subnet_id: "{{ subnet_result.subnet.id }}"
+     assign_public_ip: yes
+     region: "ap-south-1"
+     state: present
+     group_id: "{{ security_group_results.group_id }}"
+     aws_access_key: "{{aws_access_key}}"
+     aws_secret_key: "{{aws_secret_key}}"
+     instance_tags:
+             Name: "{{ item }}"
+  loop: "{{ Os_Names }}"                                 

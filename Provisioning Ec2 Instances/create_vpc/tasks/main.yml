@@ -1,0 +1,87 @@
+---
+# tasks file for create_vpc
+  - name: create a new ec2 VPC
+    ec2_vpc_net:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      name: "{{ vpc_name }}"
+      cidr_block: "{{ vpcCidrBlock }}"
+      region: "{{ region }}"
+      # enable dns support
+      dns_support: yes
+      # enable dns hostnames
+      dns_hostnames: yes
+      tenancy: default
+      state: "{{ state }}"
+    register: ec2_vpc_net_result
+  - name: create ec2 vpc internet gateway
+    # create an internet gateway for the vpc
+    ec2_vpc_igw:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      vpc_id: "{{ ec2_vpc_net_result.vpc.id }}"
+      region: "{{ region }}"
+      state: "{{ state }}"
+      tags:
+        Name: "{{ igw_name }}"
+    register: igw_result
+  - name: create ec2 vpc subnet
+    # create the subnet for the vpc with a cidr block
+    ec2_vpc_subnet:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      vpc_id: "{{ ec2_vpc_net_result.vpc.id }}"
+      region: "{{ region }}"
+      az: "{{ zone }}"      # az is the availability zone
+      state: "{{ state }}"
+      cidr: "{{ subNetCidrBlock }}"
+      # enable public ip
+      map_public: yes
+      resource_tags:
+        Name: "{{ subnet_name }}"
+    register: subnet_result
+  - name: create ec2 security group
+    # create a security group for the vpc
+    ec2_group:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      vpc_id: "{{ ec2_vpc_net_result.vpc.id }}"
+      region: "{{ region }}"
+      state: "{{ state }}"
+      name: "{{ security_group_name }}"
+      description: "{{ security_group_name }}"
+      tags:
+        Name: "{{ security_group_name  }}"
+      rules:
+      - proto: all
+#        ports:
+#        - 22
+        cidr_ip: "{{ port22CidrBlock }}"
+        rule_desc: allow all traffic
+    register: security_group_results
+    #  - name: create ec2 VPC Network access control list
+    # create the access control list with ingress and egress ports
+
+  - name: create ec2 VPC public subnet route table
+    # create route table and connect subnet to routes
+    ec2_vpc_route_table:
+      aws_access_key: "{{ aws_access_key }}"
+      aws_secret_key: "{{ aws_secret_key }}"
+      vpc_id: "{{ ec2_vpc_net_result.vpc.id }}"
+      region: "{{ region }}"
+      state: "{{ state }}"
+      tags:
+        Name: "{{ route_table_name }}"
+      subnets: [ "{{ subnet_result.subnet.id }}" ]
+
+      # create routes
+      routes:
+        - dest: "{{ destinationCidrBlock }}"
+          gateway_id: "{{ igw_result.gateway_id }}"
+    register: public_route_table
+  - name: print out new vpc, subnet id, and security group for vpc
+
+    debug:
+      msg: "To use the new created VPC: {{ vpc_name }}; Use subnet id: {{ subnet_result.subnet.id }} and security group: {{ security_group_results.group_id }} to create your AWS instances "
+
+
