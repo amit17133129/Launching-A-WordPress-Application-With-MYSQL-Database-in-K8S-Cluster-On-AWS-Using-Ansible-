@@ -6,7 +6,7 @@ In this role, you will find the tasks in the tasks folder inside main.yml file. 
 Requirements
 ------------
 ## modules used:
---  ec2
+ec2
 
 Role Variables
 --------------
