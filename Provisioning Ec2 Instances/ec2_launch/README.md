@@ -1,38 +1,46 @@
-Role Name
+Role Name: Provisioning Ec2 Instances
 =========
 
-A brief description of the role goes here.
+In this role, you will find the tasks in the tasks folder inside main.yml file. Where as the variable folder consists of variables that used thoughout the tasks.
 
 Requirements
 ------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## modules used:
+--  ec2
 
 Role Variables
 --------------
+The  below variables are used in the tasks. But you can see this variables in the vars folder also.
+# vars file for ec2_launch
+-- aws_access_key: 'enter your access key'
+-- aws_secret_key: 'enter your secret key'
+-- vpc_title: 'K8S Cluster'
+-- vpc_name: "{{ vpc_title }} VPC"
+-- igw_name: "{{ vpc_title }} IGW"
+-- subnet_name: "{{ vpc_title }} Subnet"
+-- security_group_name: "{{ vpc_title }} Security Group"
+-- route_table_name: "{{ vpc_title }} route table"
+-- vpcCidrBlock: '10.0.0.0/16'
+-- subNetCidrBlock: '10.0.1.0/24'
+-- port22CidrBlock: '0.0.0.0/0'
+-- destinationCidrBlock: '0.0.0.0/0'
+-- state: "present"
+-- zone: "ap-south-1a"
+-- region: "ap-south-1"
+-- Os_Names:
+     - "K8S_Master_testing"
+     - "K8S_Slave1_testing"
+     - "K8S_Slave2_testing"
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Including an example of how to use your role (for instance, with variables passed in as parameters):
 
-    - hosts: servers
+    - hosts: "localhost"
       roles:
-         - { role: username.rolename, x: 42 }
+        - name: "Launching ec2-instance"
+          role: "ec2_launch"
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
