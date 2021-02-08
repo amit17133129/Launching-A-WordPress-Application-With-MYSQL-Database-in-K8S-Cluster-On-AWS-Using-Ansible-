@@ -558,11 +558,11 @@ This main playbook consists of the following:
 
 As we are using **dynamic inventory** then the inventory plugins for AWS i.e ***ec2.ini*** and ***ec2.py*** will fetch the ip address of the master and slaves using the *tag names* respectively. The first role will run for configuring master node and then role for configuration of Slave Nodes. As you can see that i have used here the ***vars_prompt*** module that will prompt ask for the token while running the main playbook. Here user needs to copy the token generated after initializing the master and to be pasted inside the prompt variable “*Enter Token To Join To Master*”. The last role will launch the wordpress and mysql pods respectively as well as expose that pods. You can run the main playbook using `ansible-playbook main_plybook.yml`.
 
-![Running Main Playbook](https://miro.medium.com/max/875/1*kYH4UP79zjbxyzQMkQD0Og.gif)
+![Running Main Playbook](https://github.com/amit17133129/Launching-A-WordPress-Application-With-MYSQL-Database-in-K8S-Cluster-On-AWS-Using-Ansible-/blob/main/Images/Running%20Main%20Playbook.gif?raw=true)
 
 Now you can take th public of any node wither master or slave with the exposed port you will landed to the *wordpress login* page and then enter *password* and *username* of the **mysql database** and hit the `run installation` button. your wordpress application will be ready !! You can check the example in the below gif.
 
-![WordPress Mysql](https://miro.medium.com/max/875/1*s02cknYe5QQ8Z1gz-lHljQ.gif)
+![WordPress Mysql](https://github.com/amit17133129/Launching-A-WordPress-Application-With-MYSQL-Database-in-K8S-Cluster-On-AWS-Using-Ansible-/blob/main/Images/Wordpress-Mysql.gif?raw=true)
 
 ![finally_automated](https://miro.medium.com/max/875/1*xcGxaTQ4AOy6lHrhozrogw.jpeg)
 
