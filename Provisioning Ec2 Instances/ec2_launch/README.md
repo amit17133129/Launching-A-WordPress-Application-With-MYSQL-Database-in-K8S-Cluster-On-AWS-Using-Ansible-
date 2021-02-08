@@ -12,26 +12,23 @@ Role Variables
 --------------
 The  below variables are used in the tasks. But you can see this variables in the vars folder also.
 ```
-# vars file for ec2_launch
--- aws_access_key: 'enter your access key'
--- aws_secret_key: 'enter your secret key'
--- vpc_title: 'K8S Cluster'
--- vpc_name: "{{ vpc_title }} VPC"
--- igw_name: "{{ vpc_title }} IGW"
--- subnet_name: "{{ vpc_title }} Subnet"
--- security_group_name: "{{ vpc_title }} Security Group"
--- route_table_name: "{{ vpc_title }} route table"
--- vpcCidrBlock: '10.0.0.0/16'
--- subNetCidrBlock: '10.0.1.0/24'
--- port22CidrBlock: '0.0.0.0/0'
--- destinationCidrBlock: '0.0.0.0/0'
--- state: "present"
--- zone: "ap-south-1a"
--- region: "ap-south-1"
--- Os_Names:
-     - "K8S_Master_testing"
-     - "K8S_Slave1_testing"
-     - "K8S_Slave2_testing"
+aws_access_key -- will take access key
+aws_secret_key -- will take secret key
+vpc_title      -- reference variable that will store the title
+vpc_name       -- name of the vpc
+igw_name       -- name of the internet gateway
+subnet_name    name of subnet
+security_group_name  -- name of security group
+route_table_name  -- name of the routing table
+vpcCidrBlock    -- cidr block of vpc
+subNetCidrBlock  -- cid block of subnet
+port22CidrBlock  -- cidr block
+destinationCidrBlock -- destination cidr block
+state          -- enter state
+zone           -- enter availability zones
+region         -- enter region
+Os_Names       -- will take the names of the OS
+
 ```
 
 
