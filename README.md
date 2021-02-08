@@ -566,4 +566,3 @@ Now you can take th public of any node wither master or slave with the exposed p
 
 ![finally_automated](https://miro.medium.com/max/875/1*xcGxaTQ4AOy6lHrhozrogw.jpeg)
 
-You can check the github to get the info about the roles and the playbooks.
