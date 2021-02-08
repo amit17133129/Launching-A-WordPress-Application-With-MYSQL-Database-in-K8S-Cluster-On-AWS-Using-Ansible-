@@ -3,17 +3,18 @@ Role Name: create_vpc
 
 This role will create the vpc on your respective AWS account.
 
-Requirements
+
+Modules and Parameters Used:
 ------------
 
-Here the respective modules are used: 
-
-ec2_vpc_net   -- For creating vpc
-ec2_vpc_igw   -- For creating Internet Gateway
-ec2_vpc_subnet-- For creating Subnets
-ec2_group     -- For creating Security Group
-ec2_vpc_route_table  -- Creating Route Table
-
+1. tasks         
+2. ec2_vpc_net   -- For creating vpc
+3. ec2_vpc_igw   -- For creating Internet Gateway
+4. ec2_vpc_subnet-- For creating Subnets
+5. ec2_group     -- For creating Security Group
+6. ec2_vpc_route_table  -- Creating Route Table
+7. debug
+8. register
 
 
 Role Variables
@@ -35,8 +36,7 @@ state          -- enter state
 zone           -- enter availability zones
 region         -- enter region
 ```
-Dependencies
-------------
+
 
 Example Playbook
 ----------------
