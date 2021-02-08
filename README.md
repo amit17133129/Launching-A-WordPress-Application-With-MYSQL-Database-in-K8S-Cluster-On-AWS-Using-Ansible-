@@ -217,7 +217,7 @@ Now we can proceed with running the main playbook. you create a new file named a
 ```
 Now after creating ***main_playbook.yml*** then we can run that using  `ansible-playbook     main_playbook.yml`. Ensure one thing if the main playbook run then roles will run simultaneously.
 
-![fe](https://miro.medium.com/max/875/1*AjA-BB1RwzXpqIRe1OKCNg.gif)
+![fe](https://github.com/amit17133129/Launching-A-WordPress-Application-With-MYSQL-Database-in-K8S-Cluster-On-AWS-Using-Ansible-/blob/main/Images/Ec2-launch.gif?raw=true)
 
 Now you can check the ec2 dashboard you will be finding that three instances are created.
 
