@@ -1,38 +1,49 @@
-Role Name
+Role Name: create_vpc
 =========
 
-A brief description of the role goes here.
+This role will create the vpc on your respective AWS account.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Here the respective modules are used: 
+
+ec2_vpc_net   -- For creating vpc
+ec2_vpc_igw   -- For creating Internet Gateway
+ec2_vpc_subnet-- For creating Subnets
+ec2_group     -- For creating Security Group
+ec2_vpc_route_table  -- Creating Route Table
+
+
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
+```
+aws_access_key -- will take access key
+aws_secret_key -- will take secret key
+vpc_title      -- reference variable that will store the title
+vpc_name       -- name of the vpc
+igw_name       -- name of the internet gateway
+subnet_name    name of subnet
+security_group_name  -- name of security group
+route_table_name  -- name of the routing table
+vpcCidrBlock    -- cidr block of vpc
+subNetCidrBlock  -- cid block of subnet
+port22CidrBlock  -- cidr block
+destinationCidrBlock -- destination cidr block
+state          -- enter state
+zone           -- enter availability zones
+region         -- enter region
+```
 Dependencies
 ------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+      - hosts: "localhost"
+        roles:
+          - name: "Creating VPC"
+            role: "/root/create_vpc" 
