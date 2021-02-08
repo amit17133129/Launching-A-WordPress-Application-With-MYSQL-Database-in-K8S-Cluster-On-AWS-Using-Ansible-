@@ -1,4 +1,4 @@
-Role Name: Provisioning Ec2 Instances
+Role Name: ec2_launch
 =========
 
 In this role, you will find the tasks in the tasks folder inside main.yml file. Where as the variable folder consists of variables that used thoughout the tasks.
