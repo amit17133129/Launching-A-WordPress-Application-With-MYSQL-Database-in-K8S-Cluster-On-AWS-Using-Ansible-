@@ -69,7 +69,7 @@
        echo "1"  > /proc/sys/net/bridge/bridge-nf-call-iptables
   changed_when: false
 
-- name: "Initializing Master"
+- name: "Joining Slaves to Master Node"
   shell: "{{ master_token  }}"
   ignore_errors: yes
   register: init
