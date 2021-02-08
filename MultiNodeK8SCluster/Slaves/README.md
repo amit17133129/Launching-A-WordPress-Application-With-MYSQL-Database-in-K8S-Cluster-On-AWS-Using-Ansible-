@@ -13,7 +13,7 @@ Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters):
-
+```
       - hosts: ["tag_Name_K8S_Slave1_testing", "tag_Name_K8S_Slave2_testing"]
         vars_prompt:
          - name: "master_token"
@@ -22,3 +22,4 @@ Including an example of how to use your role (for instance, with variables passe
         roles:
           - name: "Configuring Slave Node"
             role:  "/root/MultiNodeK8SCluster/Slaves"
+```
