@@ -430,7 +430,7 @@ Now we need to create the *tokens* which is provided while initializing the mast
 
 We have completed all the required steps to achieve configuration on master node. Now we need to do configuration on Slave nodes. The Configuration on Slave nodes is much simpler as most of the steps are repeated.
 
-## Steps for the configuration of master in kubernetes cluster:
+## Steps for the configuration of Slaves in kubernetes cluster:
 1. Install docker (As we are using Amazon Linux 2 image so we don’t need to configure repo for docker).
 2. Start docker.
 3. enable docker.
